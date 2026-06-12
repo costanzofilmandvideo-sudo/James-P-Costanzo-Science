@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>James P. Costanzo — Researcher | Vanderbilt University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --bg2: #13151c;
+    --bg3: #1a1d26;
+    --border: rgba(255,255,255,0.07);
+    --text: #d8dce8;
+    --muted: #7a8099;
+    --accent: #7eb8f7;
+    --accent2: #a78bfa;
+    --warm: #f0c674;
+    --white: #f0f2f8;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--text); font-family:'Jost',sans-serif; font-weight:300; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1.2rem 3rem;
+    background:rgba(13,15,20,0.96);
+    border-bottom:1px solid var(--border);
+    backdrop-filter:blur(8px);
+  }
+  .nav-name {
+    font-family:'Playfair Display',serif; font-size:1rem;
+    color:var(--white); letter-spacing:0.04em;
+  }
+  .nav-name span { color:var(--accent); }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a {
+    color:var(--muted); text-decoration:none; font-size:0.78rem;
+    letter-spacing:0.12em; text-transform:uppercase; transition:color 0.2s;
+  }
+  .nav-links a:hover { color:var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height:100vh; display:grid;
+    grid-template-columns:1fr 1fr;
+    padding-top:70px;
+  }
+  .hero-img {
+    position:relative; overflow:hidden;
+  }
+  .hero-img img {
+    width:100%; height:100%; object-fit:cover; object-position:center 15%;
+    filter:brightness(0.75);
+  }
+  .hero-img::after {
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(to right, transparent 70%, var(--bg) 100%);
+  }
+  .hero-content {
+    display:flex; flex-direction:column; justify-content:center;
+    padding:4rem 4rem 4rem 3rem;
+    background:var(--bg);
+  }
+  .hero-eyebrow {
+    font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:1.2rem;
+  }
+  .hero-name {
+    font-family:'Playfair Display',serif; font-size:clamp(2.4rem,4vw,3.6rem);
+    font-weight:400; line-height:1.1; color:var(--white); margin-bottom:0.4rem;
+  }
+  .hero-title {
+    font-size:1rem; color:var(--muted); margin-bottom:2rem; font-weight:300;
+  }
+  .hero-divider { width:40px; height:1px; background:var(--accent); margin-bottom:2rem; }
+  .hero-bio {
+    font-size:0.9rem; line-height:1.9; color:var(--text); max-width:440px;
+    margin-bottom:2rem;
+  }
+  .hero-bio strong { color:var(--white); font-weight:400; }
+  .hero-tags { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:2.5rem; }
+  .tag {
+    font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase;
+    padding:4px 12px; border:1px solid var(--border);
+    color:var(--muted); border-radius:2px;
+  }
+  .hero-links { display:flex; gap:1rem; }
+  .btn {
+    display:inline-block; padding:0.75rem 1.8rem;
+    font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase;
+    text-decoration:none; transition:all 0.25s; border-radius:2px;
+  }
+  .btn-primary { background:var(--accent); color:var(--bg); }
+  .btn-primary:hover { background:#a8d4ff; }
+  .btn-ghost { border:1px solid var(--border); color:var(--muted); }
+  .btn-ghost:hover { border-color:var(--accent); color:var(--accent); }
+
+  /* SECTIONS */
+  section { padding:6rem 3rem; }
+  .section-label {
+    font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:1rem;
+  }
+  .section-title {
+    font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3vw,2.6rem);
+    font-weight:400; color:var(--white); margin-bottom:1.5rem; line-height:1.2;
+  }
+  .section-title em { font-style:italic; color:var(--accent2); }
+  .max-w { max-width:1100px; margin:0 auto; }
+  .prose {
+    font-size:0.9rem; line-height:1.95; color:var(--text); max-width:700px;
+  }
+  .prose p { margin-bottom:1.1rem; }
+  .term { color:var(--accent); }
+  .italic { font-style:italic; color:var(--muted); }
+
+  /* RESEARCH */
+  .research-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:3rem;
+  }
+  .research-card {
+    background:var(--bg2); border:1px solid var(--border); border-radius:4px;
+    padding:2rem; transition:border-color 0.25s;
+  }
+  .research-card:hover { border-color:rgba(126,184,247,0.3); }
+  .research-card-icon {
+    width:36px; height:36px; border-radius:50%;
+    background:rgba(126,184,247,0.1);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:1.2rem;
+  }
+  .research-card h3 {
+    font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:400;
+    color:var(--white); margin-bottom:0.8rem;
+  }
+  .research-card p { font-size:0.85rem; line-height:1.8; color:var(--muted); }
+
+  /* MICROSCOPY */
+  .micro-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:4px; margin-top:2rem;
+  }
+  .micro-item { overflow:hidden; aspect-ratio:1/1; position:relative; }
+  .micro-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
+  .micro-item:hover img { transform:scale(1.04); }
+  .micro-caption {
+    position:absolute; bottom:0; left:0; right:0;
+    background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,transparent 100%);
+    padding:1.5rem 0.8rem 0.7rem;
+    opacity:0; transition:opacity 0.3s;
+  }
+  .micro-item:hover .micro-caption { opacity:1; }
+  .micro-caption span { font-size:0.72rem; color:var(--text); letter-spacing:0.06em; }
+
+  /* PUBLICATIONS */
+  .pub-list { list-style:none; margin-top:2rem; }
+  .pub-item {
+    padding:1.5rem 0; border-bottom:1px solid var(--border);
+    display:grid; grid-template-columns:auto 1fr; gap:1.5rem; align-items:start;
+  }
+  .pub-item:last-child { border-bottom:none; }
+  .pub-year {
+    font-family:'JetBrains Mono',monospace; font-size:0.78rem;
+    color:var(--accent); min-width:40px; padding-top:3px;
+  }
+  .pub-content h4 {
+    font-size:0.95rem; color:var(--white); font-weight:400;
+    margin-bottom:0.4rem; line-height:1.5;
+  }
+  .pub-journal { font-size:0.82rem; color:var(--muted); font-style:italic; }
+  .pub-authors { font-size:0.8rem; color:var(--muted); margin-top:0.3rem; }
+  .pub-authors strong { color:var(--accent); font-weight:400; }
+  .pub-badge {
+    display:inline-block; font-size:0.65rem; letter-spacing:0.1em;
+    text-transform:uppercase; padding:2px 8px; border-radius:2px;
+    margin-left:0.5rem; vertical-align:middle;
+  }
+  .badge-review { background:rgba(167,139,250,0.15); color:var(--accent2); border:1px solid rgba(167,139,250,0.3); }
+  .badge-prep { background:rgba(240,198,116,0.1); color:var(--warm); border:1px solid rgba(240,198,116,0.25); }
+  .badge-pub { background:rgba(126,184,247,0.1); color:var(--accent); border:1px solid rgba(126,184,247,0.25); }
+
+  /* CV / EDUCATION */
+  .cv-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; margin-top:2.5rem; }
+  .cv-block h3 {
+    font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:1.5rem;
+  }
+  .cv-entry { padding:1.2rem 0; border-bottom:1px solid var(--border); }
+  .cv-entry:last-child { border-bottom:none; }
+  .cv-entry-title { font-size:0.9rem; color:var(--white); margin-bottom:0.25rem; }
+  .cv-entry-sub { font-size:0.82rem; color:var(--muted); }
+  .cv-entry-date { font-size:0.75rem; color:var(--accent); font-family:'JetBrains Mono',monospace; }
+
+  /* AWARDS */
+  .awards-list { list-style:none; margin-top:1.5rem; }
+  .awards-list li {
+    display:flex; gap:1rem; padding:0.9rem 0;
+    border-bottom:1px solid var(--border); align-items:baseline;
+    font-size:0.87rem;
+  }
+  .awards-list li:last-child { border-bottom:none; }
+  .award-year { color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:0.75rem; min-width:40px; }
+  .award-name { color:var(--text); }
+  .award-body { color:var(--muted); font-size:0.8rem; }
+
+  /* CONTACT */
+  .contact-section {
+    background:var(--bg2); text-align:center;
+    padding:6rem 3rem;
+    border-top:1px solid var(--border);
+  }
+  .contact-section p { max-width:520px; margin:0 auto 2rem; font-size:0.9rem; line-height:1.8; color:var(--muted); }
+
+  /* FOOTER */
+  footer {
+    padding:1.5rem 3rem; background:var(--bg);
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:0.74rem; color:var(--muted);
+    border-top:1px solid var(--border);
+  }
+  footer a { color:var(--muted); text-decoration:none; }
+  footer a:hover { color:var(--accent); }
+
+  @media(max-width:768px){
+    .hero { grid-template-columns:1fr; min-height:auto; }
+    .hero-img {
+      height:75vw;
+      max-height:420px;
+      overflow:hidden;
+    }
+    .hero-img img {
+      object-position:center 20%;
+      height:100%;
+    }
+    .hero-img::after {
+      background:linear-gradient(to bottom, transparent 50%, var(--bg) 100%);
+    }
+    .hero-content { padding:2rem 1.5rem 3rem; }
+    nav { padding:1rem 1.5rem; }
+    .nav-links { gap:1rem; font-size:0.7rem; }
+    .research-grid, .cv-grid { grid-template-columns:1fr; }
+    .micro-grid { grid-template-columns:repeat(2,1fr); }
+    section { padding:4rem 1.5rem; }
+  }
+</style>
+<script src="https://player.vimeo.com/api/player.js"></script>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">James P. <span>Costanzo</span></span>
+  <ul class="nav-links">
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#microscopy">Microscopy</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-img"><img src="images/01-hero-headshot.jpg" alt="James P. Costanzo — Vanderbilt researcher" style="">
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">PhD Candidate · Vanderbilt University</p>
+    <h1 class="hero-name">James P.<br>Costanzo</h1>
+    <p class="hero-title">Cell & Developmental Biology · Gama Lab</p>
+    <div class="hero-divider"></div>
+    <p class="hero-bio">
+      I study how mitochondrial dynamics shape human neurogenesis, with a focus on DRP1-mediated fission and its role in a rare neurodevelopmental disorder called EMPF1. My work uses patient-derived iPSCs, CRISPR/Cas9 engineering, and live-cell imaging to model the disease in human neurons.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">Mitochondrial Dynamics</span>
+      <span class="tag">DRP1 / EMPF1</span>
+      <span class="tag">hiPSC Models</span>
+      <span class="tag">CRISPR/Cas9</span>
+      <span class="tag">Neurogenesis</span>
+    </div>
+    <div class="hero-links">
+      <a href="#publications" class="btn btn-primary">Publications</a>
+      <a href="#contact" class="btn btn-ghost">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="max-w">
+    <p class="section-label">Research</p>
+    <h2 class="section-title">Mitochondrial fission &amp; <em>human neurogenesis</em></h2>
+    <div class="prose">
+      <p>
+        <span class="term">Dynamin-Related Protein 1 (DRP1)</span> is the primary effector of mitochondrial and peroxisomal fission. Mutations in DRP1 cause EMPF1 — a rare epileptic encephalopathy characterized by impaired neurogenesis and severe neurodevelopmental delay. Despite its essential role, the mechanisms by which organelle fission contributes to metabolic signaling and cell fate determination during human neurogenesis remain poorly understood.
+      </p>
+      <p>
+        My doctoral research in the <span class="term">Gama Lab at Vanderbilt</span> interrogates this critical question by characterizing how DRP1 activity shapes metabolic signaling and early human neurogenesis. I address these questions using human induced pluripotent stem cells (hiPSCs) carrying DRP1 mutations — generated via CRISPR/Cas9, or by reprogramming fibroblasts from affected individuals — to derive neural progenitors and neurons as human cellular disease models.
+      </p>
+    </div>
+
+    <div class="research-grid">
+      <div class="research-card">
+        <div class="research-card-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7eb8f7" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3>DRP1 & Mitochondrial Fission</h3>
+        <p>Characterizing how DRP1 GTPase activity regulates mitochondrial morphology, metabolic output, and peroxisomal dynamics in neural progenitor cells during differentiation.</p>
+      </div>
+      <div class="research-card">
+        <div class="research-card-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7eb8f7" stroke-width="1.5"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+        </div>
+        <h3>hiPSC Disease Modeling</h3>
+        <p>Engineering patient-derived iPSC lines with CRISPR/Cas9 to introduce DRP1 mutations, then differentiating into cortical neural progenitors and neurons to study the cellular basis of EMPF1.</p>
+      </div>
+      <div class="research-card">
+        <div class="research-card-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7eb8f7" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Metabolic Signaling</h3>
+        <p>Investigating how impaired fission disrupts acetyl-CoA metabolism and downstream signaling during early neurogenesis.</p>
+      </div>
+      <div class="research-card">
+        <div class="research-card-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7eb8f7" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Live-Cell &amp; Fluorescence Imaging</h3>
+        <p>Spinning disc confocal microscopy and Nikon Elements ND2 acquisition pipelines. Three-time winner of the Vanderbilt CDB and Vanderbilt Nikon Center of Excellence imaging competitions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications" style="background:var(--bg2);">
+  <div class="max-w">
+    <p class="section-label">Publications</p>
+    <h2 class="section-title">Research <em>output</em></h2>
+        <ul class="pub-list">
+
+      <li class="pub-item">
+        <span class="pub-year">2025</span>
+        <div class="pub-content">
+          <h4><a href="https://www.biorxiv.org/content/10.64898/2025.12.12.694056v1" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Pharmacological inhibition of MCL-1 disrupts mitochondrial cristae and depletes the human neural progenitor cell pool</a>
+            <span class="pub-badge badge-review">Preprint</span>
+          </h4>
+          <div class="pub-journal"><em>bioRxiv</em> · doi: 10.64898/2025.12.12.694056 · Posted December 14, 2025</div>
+          <div class="pub-authors">Hanna MR, Yarbrough M, Gil M, <strong>Costanzo J</strong>, Gama V · Vanderbilt University</div>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <span class="pub-year">2025</span>
+        <div class="pub-content">
+          <h4><a href="https://link.springer.com/article/10.1038/s44321-025-00279-3" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Convergent activation of the integrated stress response and ER–mitochondria uncoupling in VAPB-associated ALS</a>
+            <span class="pub-badge badge-pub">Published</span>
+          </h4>
+          <div class="pub-journal"><em>EMBO Molecular Medicine</em> · Vol. 17, pp. 2299–2331 · doi: 10.1038/s44321-025-00279-3 · Published August 5, 2025</div>
+          <div class="pub-authors">Landry C, <strong>Costanzo JP</strong>, Mitne-Neto M, Zatz M, Schaffer AE, Hatzoglou M, Muotri AR, Miranda HC · Case Western Reserve University</div>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <span class="pub-year">2024</span>
+        <div class="pub-content">
+          <h4><a href="https://pubmed.ncbi.nlm.nih.gov/39229012/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Patient mutations in DRP1 perturb synaptic maturation of cortical neurons</a>
+            <span class="pub-badge badge-review">Preprint</span>
+          </h4>
+          <div class="pub-journal"><em>bioRxiv</em> · doi: 10.1101/2024.08.23.609462 · PMID: 39229012 · PMC11370610 · Posted August 26, 2024</div>
+          <div class="pub-authors">Baum TB, Bodnya C, <strong>Costanzo J</strong>, Gama V · Vanderbilt University</div>
+        </div>
+      </li>
+
+    </ul>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:2rem;font-style:italic;">The bioRxiv preprints are in preparation for peer-reviewed journal submission. Contact <a href="mailto:james.costanzo@vanderbilt.edu" style="color:var(--accent);">james.costanzo@vanderbilt.edu</a> for current versions.</p>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:2rem;font-style:italic;">Publication titles and journal details will be updated upon acceptance. Contact james.costanzo@vanderbilt.edu for preprints.</p>
+  </div>
+</section>
+
+<!-- MICROSCOPY -->
+<section id="microscopy">
+  <div class="max-w">
+    <p class="section-label">Microscopy &amp; Imaging</p>
+    <h2 class="section-title">The beauty <em>between cells</em></h2>
+    <div class="prose">
+      <p>Fluorescence microscopy is where my scientific training meets my background as a photographer. These images are raw data from live experiments — captured on a spinning disc confocal microscope. Three-time winner of the Vanderbilt CDB and Vanderbilt Nikon Center of Excellence imaging competitions (2024, 2025, 2026).</p>
+    </div>
+
+    <!-- Featured hero image -->
+    <div style="margin-top:2rem;position:relative;overflow:hidden;border-radius:2px;aspect-ratio:4/3;max-height:65vh;">
+      <img src="images/02-featured-empf1-fibroblast.jpg" alt="EMPF1 patient fibroblasts — DRP1 mutation fluorescence microscopy" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:1.5rem 1.5rem 1rem;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,transparent 100%);">
+        <span style="font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);background:rgba(0,0,0,0.4);padding:3px 8px;border-radius:2px;">EMPF1 Patient Fibroblasts · DRP1 Mutation</span>
+        <p style="font-size:0.82rem;color:var(--text);margin:0.5rem 0 0;line-height:1.6;">Fluorescence microscopy · Control vs R403C DRP1 mutation · Vanderbilt Imaging Competition Winner</p>
+      </div>
+    </div>
+
+    <!-- Gallery grid -->
+    <div class="micro-grid" style="margin-top:4px;">
+      <div class="micro-item">
+        <img src="images/03-gallery-cortical-neurons.jpg" alt="Cortical neurons — neuronal network purple/orange" style="width:100%;height:100%;object-fit:cover;">
+        <div class="micro-caption"><span>Cortical Neurons · Neuronal Network · MAP2 / CTIP2</span></div>
+      </div>
+      <div class="micro-item">
+        <img src="images/04-gallery-ctx-neurons-cyan.jpg" alt="CTX neurons — cyan bundle with red/yellow nuclei" style="width:100%;height:100%;object-fit:cover;">
+        <div class="micro-caption"><span>CTX Neurons · MAP2 (cyan) · CTIP2 (red) · SOX2 (yellow)</span></div>
+      </div>
+      <div class="micro-item">
+        <img src="images/05-gallery-empf1-fibroblast.jpg" alt="EMPF1 patient fibroblast — magenta mitochondria teal nucleus" style="width:100%;height:100%;object-fit:cover;">
+        <div class="micro-caption"><span>EMPF1 Patient Fibroblast · Mitochondria (magenta) · Nucleus (teal)</span></div>
+      </div>
+      <div class="micro-item">
+        <img src="images/06-gallery-control-ctx-100x.jpg" alt="Control CTX day-60 100x — green axons blue nuclei" style="width:100%;height:100%;object-fit:cover;">
+        <div class="micro-caption"><span>Control · CTX day-60 · 100x · MAP2 (green) · DAPI (blue)</span></div>
+      </div>
+      <div class="micro-item">
+        <img src="images/07-gallery-ctx-neurons-green-red.jpg" alt="CTX neurons — green MAP2 axons red CTIP2 nuclei" style="width:100%;height:100%;object-fit:cover;">
+        <div class="micro-caption"><span>CTX day-60 · 100x · MAP2 (green) · CTIP2 (red) · Deconvolved MaxIP</span></div>
+      </div>
+      <div class="micro-item">
+        <img src="images/08-gallery-control-ctx-60x.jpg" alt="Control CTX day-60 60x — green axons red nuclei" style="width:100%;height:100%;object-fit:cover;">
+        <div class="micro-caption"><span>Control · CTX day-60 · 60x · MAP2 (green) · CTIP2 (red)</span></div>
+      </div>
+      <div class="micro-item">
+        <img src="images/09-gallery-r403c-100x-magenta.jpg" alt="R403C CTX day-60 100x — magenta neurites green nuclei" style="width:100%;height:100%;object-fit:cover;">
+        <div class="micro-caption"><span>R403C · CTX day-60 · 100x · B3Tubulin (magenta) · CTIP2 (green)</span></div>
+      </div>
+      <div class="micro-item">
+        <img src="images/10-gallery-r403c-100x-blue.jpg" alt="R403C CTX day-60 100x — green axons blue nuclei" style="width:100%;height:100%;object-fit:cover;">
+        <div class="micro-caption"><span>R403C · CTX day-60 · 100x · MAP2 (green) · DAPI (blue)</span></div>
+      </div>
+      <div class="micro-item">
+        <img src="images/11-gallery-empf1-kaleidoscope.jpg" alt="EMPF1 patient fibroblast mitochondria kaleidoscope composite" style="width:100%;height:100%;object-fit:cover;">
+        <div class="micro-caption"><span>EMPF1 Patient Fibroblast · Mitochondria (magenta) · Nucleus (teal) · Composite</span></div>
+      </div>
+
+      
+    </div>
+
+    <!-- Vimeo videos -->
+    <div style="margin-top:4rem;">
+      <p class="section-label" style="margin-bottom:1rem;">Live-Cell Imaging Videos</p>
+      <p style="font-size:0.85rem;color:var(--muted);margin-bottom:2rem;max-width:640px;">Time-lapse and live-cell microscopy from the DRP1 neurogenesis project. Captured using Nikon Elements ND2 acquisition pipelines.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+        <div style="border-radius:2px;overflow:hidden;background:var(--bg2);">
+          <div style="position:relative;width:100%;aspect-ratio:16/9;">
+            <iframe src="https://player.vimeo.com/video/1199071144?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1"
+              frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+              title="Calcium Imaging — DRP1 Neurogenesis, Video 1"></iframe>
+          </div>
+          <div style="padding:0.9rem 1.2rem;">
+            <span style="font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);">Calcium Imaging · Video 1</span>
+            <p style="font-size:0.82rem;color:var(--muted);margin:0.4rem 0 0;line-height:1.6;">DRP1 neurogenesis project · Cal520 (488 nm) · DAPI (405 nm) · Nikon Elements ND2</p>
+          </div>
+        </div>
+        <div style="border-radius:2px;overflow:hidden;background:var(--bg2);">
+          <div style="position:relative;width:100%;aspect-ratio:16/9;">
+            <iframe src="https://player.vimeo.com/video/1199071143?badge=0&autopause=0&player_id=0&app_id=58479&background=1&autoplay=1&loop=1&muted=1"
+              frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+              title="Live-Cell Mitochondrial Imaging — DRP1 Neurogenesis, Video 2"></iframe>
+          </div>
+          <div style="padding:0.9rem 1.2rem;">
+            <span style="font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);">Mitochondrial Imaging · Video 2</span>
+            <p style="font-size:0.82rem;color:var(--muted);margin:0.4rem 0 0;line-height:1.6;">DRP1 neurogenesis project · MitoTracker · DAPI (405 nm) · Nikon Elements ND2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:2rem;font-style:italic;">Three-time winner, Vanderbilt CDB Imaging Competition (2024, 2025, 2026). Images available for educational use — contact for licensing.</p>
+  </div>
+</section>
+
+<!-- CV -->
+<section id="cv" style="background:var(--bg2);">
+  <div class="max-w">
+    <p class="section-label">Curriculum Vitae</p>
+    <h2 class="section-title">Education &amp; <em>experience</em></h2>
+    <div class="cv-grid">
+      <div class="cv-block">
+        <h3>Education</h3>
+        <div class="cv-entry">
+          <div class="cv-entry-date">2023 — present</div>
+          <div class="cv-entry-title">PhD Candidate, Cell &amp; Developmental Biology</div>
+          <div class="cv-entry-sub">Vanderbilt University School of Medicine · GPA 4.0<br>Advisor: Dr. Vivian Gama</div>
+        </div>
+        <div class="cv-entry">
+          <div class="cv-entry-date">2019 — 2022</div>
+          <div class="cv-entry-title">B.S. Biology (Minors: Neuroscience, Psychology)</div>
+          <div class="cv-entry-sub">Ramapo College of New Jersey · GPA 3.90 · <em>Summa Cum Laude</em></div>
+        </div>
+      </div>
+      <div class="cv-block">
+        <h3>Research Experience</h3>
+        <div class="cv-entry">
+          <div class="cv-entry-date">2023 — present</div>
+          <div class="cv-entry-title">PhD Researcher — Gama Lab</div>
+          <div class="cv-entry-sub">Vanderbilt University · DRP1 / mitochondrial dynamics / hiPSC neurogenesis</div>
+        </div>
+        <div class="cv-entry">
+          <div class="cv-entry-date">2020 — 2023</div>
+          <div class="cv-entry-title">Research Assistant II — Miranda Lab</div>
+          <div class="cv-entry-sub">Case Western Reserve University · ALS &amp; epileptic encephalopathy iPSC models</div>
+        </div>
+      </div>
+      <div class="cv-block">
+        <h3>Honors &amp; Societies</h3>
+        <ul class="awards-list">
+          <li><span class="award-year">2024–26</span><div><div class="award-name">Imaging Competition Winner (×3)</div><div class="award-body">Vanderbilt CDB Department</div></div></li>
+          <li><span class="award-year">2019</span><div><div class="award-name">Presidential Scholarship</div><div class="award-body">Ramapo College of New Jersey</div></div></li>
+          <li><span class="award-year">—</span><div><div class="award-name">Sigma Xi · Psi Chi · Beta Beta Beta</div><div class="award-body">Honor Societies</div></div></li>
+        </ul>
+      </div>
+      <div class="cv-block">
+        <h3>Teaching &amp; Service</h3>
+        <ul class="awards-list">
+          <li><span class="award-year">2024</span><div><div class="award-name">Neurodevelopment Course Instructor</div><div class="award-body">Vanderbilt Programs for Talented Youth (PTY)</div></div></li>
+          <li><span class="award-year">2023–</span><div><div class="award-name">Community Development Chair</div><div class="award-body">Vanderbilt CDB Graduate Student Association</div></div></li>
+          <li><span class="award-year">2023–</span><div><div class="award-name">Undergraduate &amp; Rotation Mentor</div><div class="award-body">Gama Lab, Vanderbilt</div></div></li>
+          <li><span class="award-year">2023–</span><div><div class="award-name">Department Event Photographer</div><div class="award-body">CDB, Vanderbilt School of Medicine</div></div></li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem;">
+      <a href="mailto:james.costanzo@vanderbilt.edu" class="btn btn-ghost">Request full CV →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="max-w" style="text-align:center;">
+    <p class="section-label" style="text-align:center;">Contact</p>
+    <h2 class="section-title" style="text-align:center;">Get in <em>touch</em></h2>
+    <p>Whether you have questions about my research, are interested in collaboration, would like a preprint, or want to discuss imaging data — I am happy to hear from you.</p>
+    <a href="mailto:james.costanzo@vanderbilt.edu" class="btn btn-primary">james.costanzo@vanderbilt.edu</a>
+    <p style="margin-top:1.5rem;font-size:0.78rem;color:var(--muted);">Vanderbilt University School of Medicine · Nashville, TN</p>
+    <p style="margin-top:0.5rem;font-size:0.78rem;">
+      <a href="https://costanzofilmandvideo.com" style="color:var(--muted);text-decoration:none;" target="_blank">Photography &amp; videography portfolio ↗</a>
+    </p>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 James P. Costanzo · Vanderbilt University</span>
+  <span><a href="mailto:james.costanzo@vanderbilt.edu">james.costanzo@vanderbilt.edu</a></span>
+</footer>
+
+</body>
+</html>
